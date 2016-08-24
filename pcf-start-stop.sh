@@ -9,6 +9,10 @@ else
   export BUNDLE_GEMFILE=/home/tempest-web/tempest/web/bosh.Gemfile
 fi
 
+#Target good deployment
+export CF_DEPLOYMENT=`bundle exec bosh deployments | awk '{print $2}' | grep "cf-"`
+bundle exec bosh deployment /var/tempest/workspaces/default/deployments/${CF_DEPLOYMENT}.yml
+
 if [ $1 == "shut" -o $1 == "start" ];
         then
                 echo "Running PCF $1 Process..."
